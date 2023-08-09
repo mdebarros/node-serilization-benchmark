@@ -1,11 +1,13 @@
 const protobuf = require('protobufjs');
 
 
-const init = async (file) => {
+const init = async (file, type) => {
 
   const root = await protobuf.load(file);
 
-  return root;
+  const message = root.lookupType(type);
+
+  return message;
 }
 
 module.exports = {

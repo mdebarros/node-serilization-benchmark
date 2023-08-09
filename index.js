@@ -4,16 +4,12 @@ const proto = require('./protobuf.js')
 const run = async () => {
   const apT0 = performance.now()
   try {
-    // const root = await proto.init(process.cwd() + '/message.proto');
-    // const TestMessage = root.lookupType("test.Message");
-
-    const root = await proto.init(process.cwd() + '/audit-start-prepare.proto');
-    const TestMessage = root.lookupType("audit.Prepare");
+    const TestMessage = await proto.init(process.cwd() + '/audit-start-prepare.proto', "audit.Prepare");
 
     const protoUtil = {
       encode: (object) => {
         // Verify the payload if necessary (i.e. when possibly incomplete or invalid)
-        // const errMsg = TestMessage.verify(payload);
+        const errMsg = TestMessage.verify(payload);
 
         // ... do something with buffer
         // if (errMsg) console.error(errMsg);
