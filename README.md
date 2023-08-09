@@ -4,7 +4,7 @@
 
 - Changed HTTP headers with hyphens `-` to underscores `_` for simplicity due to a lack of support Protobuf v3. This can be resolved by adding annotation mappings.
 
-## Output
+## Example Output
 
 I am seeing the following results on a 2019 Macbook Pro 16:
 
