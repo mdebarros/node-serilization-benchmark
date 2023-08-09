@@ -1,0 +1,21 @@
+// package preftest;
+// syntax = "proto3";
+
+// message PerfTest {
+//   required int32 num  = 1;
+//   required string str = 2;
+// }
+
+
+// awesome.proto
+package test;
+syntax = "proto3";
+
+// message AwesomeMessage {
+//     string awesome_field = 1; // becomes awesomeField
+// }
+
+message Message {
+  required int32 num  = 1;
+  required string str = 2;
+}
