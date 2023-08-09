@@ -20,7 +20,7 @@ const run = async () => {
         // if (errMsg) console.error(errMsg);
 
         // Create a new message
-        // const message = TestMessage.create(payload); // or use .fromObject if conversion is necessary
+        const message = TestMessage.create(payload); // or use .fromObject if conversion is necessary
         // const message = TestMessage.fromObject(payload);
         // console.log(message);
 
@@ -64,16 +64,21 @@ const run = async () => {
 
     const itterations = 100000;
 
-    const message = TestMessage.fromObject(payload);
+    console.log(`Running itterations=${itterations}`)
+    console.log('-----------------------------------')
+
+    // const message = TestMessage.fromObject(payload);
     const peT0 = performance.now()
     for(var i = 0; i < itterations; i++) {
-      const buffer = protoUtil.encode(message);
+      const buffer = protoUtil.encode(payload);
+      // const buffer = protoUtil.encode(message);
     }
     const peT1 = performance.now()
     console.log("Protobuf-encode = " + (peT1 - peT0) + " milliseconds.")
     // console.log(buffer);
 
     const buffer = protoUtil.encode(payload);
+
     const pdT0 = performance.now()
     for(var i = 0; i < itterations; i++) {
       const object = protoUtil.decode(buffer);
@@ -91,6 +96,7 @@ const run = async () => {
     // console.log(buffer2);
     
     const buffer2 = jsonUtil.encode(payload);
+
     const jdT0 = performance.now()
     for(var i = 0; i < itterations; i++) {
       const object2 = jsonUtil.decode(buffer2);
@@ -98,6 +104,14 @@ const run = async () => {
     const jdT1 = performance.now()
     console.log("Json-decode = " + (jdT1 - jdT0) + " milliseconds.")
     // console.log(object2);
+
+
+    const sizeDiff = 1 - buffer2.length / buffer.length;
+    console.log('-----------------------------------')
+    console.log(`itterations=${itterations}`)
+    console.log(`Protobuf-encode-buffer=${buffer.length/1000}kb`)
+    console.log(`Json-encode-buffer2=${buffer2.length/1000}kb`)
+    console.log(`sizeDiff=${(sizeDiff*100).toFixed(2)}%`)
 
   } catch (err) {
     console.error(err)
