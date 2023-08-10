@@ -1,3 +1,4 @@
+// ## Ref: https://protobuf.dev/programming-guides/proto3/
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
